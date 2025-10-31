@@ -74,3 +74,10 @@ INSERT INTO patrons (id, name, email, borrowed_books) VALUES
 (10, 'Jack Anderson', 'jack@example.com', ARRAY[7, 8]);
 
 ---
+
+## Sprint 3: Data Retrieval
+
+SELECT * FROM books;
+SELECT * FROM books WHERE title = '1984';
+
+---
