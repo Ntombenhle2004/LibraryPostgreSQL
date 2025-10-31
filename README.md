@@ -130,3 +130,10 @@ SET published_year = 1870
 WHERE published_year = 1869;
 
 ---
+
+## Tools Used
+- **PostgreSQL** – for database creation and management  
+- **SQL** – for all queries and commands  
+
+
+---
