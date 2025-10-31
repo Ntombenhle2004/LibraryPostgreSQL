@@ -107,3 +107,26 @@ DELETE FROM authors
 WHERE author_id = 1;
 
 ---
+
+## Sprint 6: Advanced Queries and Modifications
+
+SELECT * FROM books 
+WHERE published_year > 1950;
+
+SELECT * FROM authors
+WHERE nationality = 'American';
+
+UPDATE books 
+SET available = TRUE;
+
+SELECT * FROM books
+WHERE available = TRUE AND published_year > 1950;
+
+SELECT * FROM authors
+WHERE name ILIKE '%George%';
+
+UPDATE books
+SET published_year = 1870
+WHERE published_year = 1869;
+
+---
