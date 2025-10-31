@@ -97,3 +97,13 @@ SET borrowed_books = array_append(borrowed_books, 1)
 WHERE patronsId = 3;
 
 ---
+
+##  Sprint 5: Data Deletion
+
+DELETE FROM books
+WHERE title = 'The Great Gatsby';
+
+DELETE FROM authors
+WHERE author_id = 1;
+
+---
