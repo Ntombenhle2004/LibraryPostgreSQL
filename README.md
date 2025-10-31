@@ -81,3 +81,19 @@ SELECT * FROM books;
 SELECT * FROM books WHERE title = '1984';
 
 ---
+
+## Sprint 4: Data Update
+
+UPDATE books
+SET available = FALSE
+WHERE bookId = 2;
+
+UPDATE books
+SET genres = array_append(genres, 'fall')
+WHERE booksId = 6;
+
+UPDATE patrons
+SET borrowed_books = array_append(borrowed_books, 1)
+WHERE patronsId = 3;
+
+---
