@@ -1,3 +1,5 @@
+<img src="https://socialify.git.ci/Ntombenhle2004/LibraryPostgreSQL/image?language=1&owner=1&name=1&stargazers=1&theme=Light" alt="LibraryPostgreSQL" width="640" height="320" />
+
 # Library Database Management System
 
 ## Overview
