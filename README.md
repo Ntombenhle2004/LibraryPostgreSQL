@@ -13,6 +13,7 @@ The database includes tables for **Authors**, **Books**, and **Patrons**, and is
 ### Tables Created
 
 #### 1. Authors
+```sql
 CREATE TABLE authors (
   author_id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
@@ -20,8 +21,9 @@ CREATE TABLE authors (
   birth_year INT,
   death_year INT
 );
-
+```
 #### 2. Books
+```sql
 CREATE TABLE books (
   booksId SERIAL PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
@@ -30,20 +32,23 @@ CREATE TABLE books (
   available BOOLEAN,
   author_id INT REFERENCES authors(author_id)
 );
-
+```
 #### 3. Patrons
+```sql
 CREATE TABLE patrons (
   patronsId SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   borrowed_books INT[]
 );
+```
 
 ---
 
 ## Sprint 2: Data Insertion
 
 ### Insert Book Records
+```sql
 INSERT INTO books (id, title, author_id, genres, published_year, available) VALUES
 (1, '1984', 1, ARRAY['Dystopian', 'Political Fiction'], 1949, TRUE),
 (2, 'To Kill a Mockingbird', 2, ARRAY['Southern Gothic', 'Bildungsroman'], 1960, TRUE),
@@ -55,8 +60,9 @@ INSERT INTO books (id, title, author_id, genres, published_year, available) VALU
 (8, 'War and Peace', 8, ARRAY['Historical Novel'], 1869, TRUE),
 (9, 'Crime and Punishment', 9, ARRAY['Philosophical Novel'], 1866, TRUE),
 (10, 'The Hobbit', 10, ARRAY['Fantasy'], 1937, TRUE);
-
+```
 ### Insert Author Records
+```sql
 INSERT INTO authors (id, name, nationality, birth_year, death_year) VALUES
 (1, 'George Orwell', 'British', 1903, 1950),
 (2, 'Harper Lee', 'American', 1926, 2016),
@@ -68,9 +74,10 @@ INSERT INTO authors (id, name, nationality, birth_year, death_year) VALUES
 (8, 'Leo Tolstoy', 'Russian', 1828, 1910),
 (9, 'Fyodor Dostoevsky', 'Russian', 1821, 1881),
 (10, 'J.R.R. Tolkien', 'British', 1892, 1973);
-
+```
 
 ### Insert Patron Records
+```sql
 INSERT INTO patrons (id, name, email, borrowed_books) VALUES
 (1, 'Alice Johnson', 'alice@example.com', ARRAY[]::INT[]),
 (2, 'Bob Smith', 'bob@example.com', ARRAY[1, 2]),
@@ -82,102 +89,145 @@ INSERT INTO patrons (id, name, email, borrowed_books) VALUES
 (8, 'Hank Wilson', 'hank@example.com', ARRAY[6]),
 (9, 'Ivy Taylor', 'ivy@example.com', ARRAY[]::INT[]),
 (10, 'Jack Anderson', 'jack@example.com', ARRAY[7, 8]);
+```
 
 ---
 
 ## Sprint 3: Data Retrieval
 
--- 1. Get all books
+1. Get all books
+```sql
 SELECT * FROM books;
-
--- 2. Get a book by title (example: '1984')
+```
+. Get a book by title 
+```sql
 SELECT * FROM books WHERE title = '1984';
+```
 
--- 3. Get all books by a specific author (by author name)
+3. Get all books by a specific author 
+```sql
 SELECT b.*
 FROM books b
 JOIN authors a ON b.author_id = a.id
 WHERE a.name = 'George Orwell';
+```
 
--- 4. Get all available books
+ 4. Get all available books
+```sql
 SELECT * FROM books WHERE available = TRUE;
+```
 
 ---
 
 ## Sprint 4: Data Update
-
+```sql
 UPDATE books
 SET available = FALSE
 WHERE bookId = 2;
-
+```
+```sql
 UPDATE books
 SET genres = array_append(genres, 'fall')
 WHERE booksId = 6;
-
+```
+```sql
 UPDATE patrons
 SET borrowed_books = array_append(borrowed_books, 1)
 WHERE patronsId = 3;
-
+```
 ---
 
 ##  Sprint 5: Data Deletion
-
+```sql
 DELETE FROM books
 WHERE title = 'The Great Gatsby';
+```
 
+```sql
 DELETE FROM authors
 WHERE author_id = 1;
+```
 
 ---
 
 ## Sprint 6: Advanced Queries and Modifications
-
+```sql
 SELECT * FROM books 
 WHERE published_year > 1950;
+``` 
 
+```sql
 SELECT * FROM authors
 WHERE nationality = 'American';
+```
 
+```sql
 UPDATE books 
 SET available = TRUE;
+```
 
+```sql
 SELECT * FROM books
 WHERE available = TRUE AND published_year > 1950;
+```
 
+
+```sql
 SELECT * FROM authors
 WHERE name ILIKE '%George%';
+```
 
+```sql
 UPDATE books
 SET published_year = 1870
 WHERE published_year = 1869;
-
+```
 ---
 
 ## Sprint 7: Documentation
 
 
 ## Running in pgAdmin:
-Open pgAdmin and connect to PostgreSQL server
+```sql
+ Open pgAdmin and connect to PostgreSQL server
+```
 
+```sql
 Create new database: LibraryDB
+```
+```sql
 
 Open Query Tool
+```
+```sql
 
 Execute scripts in order: table.sql → insert.sql → quaries.sql
+```
+
 ## Running in psql:
-**Connect to PostgreSQL**
+1. Connect to PostgreSQL
+
+```sql
 psql -U your_username -d postgres
+```
 
-**Create database**
+2. Create database
+
+```sql
 CREATE DATABASE LibraryDB;
+```
 
-**Connect to library database**
+3. Connect to library database
+```sql
 \c LibraryDB
+```
 
-**Execute scripts**
+4. Execute scripts
+```sql
 \i table.sql
 \i insert.sql
 \i quaries.sql
+```
 
 ---
 
