@@ -163,7 +163,7 @@ Create new database: LibraryDB
 
 Open Query Tool
 
-Execute scripts in order: Table.sql → InsertData.sql → Quaries.sql
+Execute scripts in order: table.sql → insert.sql → quaries.sql
 ## Running in psql:
 **Connect to PostgreSQL**
 psql -U your_username -d postgres
