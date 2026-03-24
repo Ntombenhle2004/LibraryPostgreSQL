@@ -120,16 +120,21 @@ SELECT * FROM books WHERE available = TRUE;
 ---
 
 ## Sprint 4: Data Update
+1. Mark a book as borrowed (set available = false).
 ```sql
 UPDATE books
 SET available = FALSE
 WHERE bookId = 2;
 ```
+
+2. Add a new genre to an existing book.
 ```sql
 UPDATE books
 SET genres = array_append(genres, 'fall')
 WHERE booksId = 6;
 ```
+
+3. Add a borrowed book to a patron’s record.
 ```sql
 UPDATE patrons
 SET borrowed_books = array_append(borrowed_books, 1)
@@ -138,11 +143,14 @@ WHERE patronsId = 3;
 ---
 
 ##  Sprint 5: Data Deletion
+
+1. Delete a book by title.
 ```sql
 DELETE FROM books
 WHERE title = 'The Great Gatsby';
 ```
 
+2. Delete an author by ID.
 ```sql
 DELETE FROM authors
 WHERE author_id = 1;
@@ -151,32 +159,37 @@ WHERE author_id = 1;
 ---
 
 ## Sprint 6: Advanced Queries and Modifications
+
+1. Find books published after 1950
 ```sql
 SELECT * FROM books 
 WHERE published_year > 1950;
 ``` 
 
+2. Find all American authors
 ```sql
 SELECT * FROM authors
 WHERE nationality = 'American';
 ```
 
+3. Set all books as available.
 ```sql
 UPDATE books 
 SET available = TRUE;
 ```
 
+4. Find all books that are available AND published after 1950.
 ```sql
 SELECT * FROM books
 WHERE available = TRUE AND published_year > 1950;
 ```
 
-
+5. Find authors whose names contain "George".
 ```sql
 SELECT * FROM authors
 WHERE name ILIKE '%George%';
 ```
-
+6. Increment the published year 1869 by 1.
 ```sql
 UPDATE books
 SET published_year = 1870
