@@ -25,7 +25,7 @@ CREATE TABLE authors (
 CREATE TABLE books (
   booksId SERIAL PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
-  genres VARCHAR(100) NOT NULL,
+  genres ARRAY[] NOT NULL,
   published_year INT,
   available BOOLEAN,
   author_id INT REFERENCES authors(author_id)
@@ -36,7 +36,7 @@ CREATE TABLE patrons (
   patronsId SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
-  borrowed_books INT
+  borrowed_books INT[]
 );
 
 ---
@@ -61,6 +61,14 @@ INSERT INTO authors (id, name, nationality, birth_year, death_year) VALUES
 (1, 'George Orwell', 'British', 1903, 1950),
 (2, 'Harper Lee', 'American', 1926, 2016),
 (3, 'F. Scott Fitzgerald', 'American', 1896, 1940);
+(4, 'Aldous Huxley', 'British', 1894, 1963),
+(5, 'J.D. Salinger', 'American', 1919, 2010),
+(6, 'Herman Melville', 'American', 1819, 1891),
+(7, 'Jane Austen', 'British', 1775, 1817),
+(8, 'Leo Tolstoy', 'Russian', 1828, 1910),
+(9, 'Fyodor Dostoevsky', 'Russian', 1821, 1881),
+(10, 'J.R.R. Tolkien', 'British', 1892, 1973);
+
 
 ### Insert Patron Records
 INSERT INTO patrons (id, name, email, borrowed_books) VALUES
@@ -79,8 +87,20 @@ INSERT INTO patrons (id, name, email, borrowed_books) VALUES
 
 ## Sprint 3: Data Retrieval
 
+-- 1. Get all books
 SELECT * FROM books;
+
+-- 2. Get a book by title (example: '1984')
 SELECT * FROM books WHERE title = '1984';
+
+-- 3. Get all books by a specific author (by author name)
+SELECT b.*
+FROM books b
+JOIN authors a ON b.author_id = a.id
+WHERE a.name = 'George Orwell';
+
+-- 4. Get all available books
+SELECT * FROM books WHERE available = TRUE;
 
 ---
 
@@ -130,6 +150,34 @@ WHERE name ILIKE '%George%';
 UPDATE books
 SET published_year = 1870
 WHERE published_year = 1869;
+
+---
+
+## Sprint 7: Documentation
+
+
+## Running in pgAdmin:
+Open pgAdmin and connect to PostgreSQL server
+
+Create new database: LibraryDB
+
+Open Query Tool
+
+Execute scripts in order: Table.sql → InsertData.sql → Quaries.sql
+## Running in psql:
+**Connect to PostgreSQL**
+psql -U your_username -d postgres
+
+**Create database**
+CREATE DATABASE LibraryDB;
+
+**Connect to library database**
+\c LibraryDB
+
+**Execute scripts**
+\i table.sql
+\i insert.sql
+\i quaries.sql
 
 ---
 
